@@ -11,8 +11,10 @@ namespace CoinBazaar.Infrastructure.Helpers
 {
     public static class DomainResponseHelper
     {
-        public static async Task<DomainEventResult> CreateDomainResponse(Guid aggregateId, IEvent @event, params KeyValuePair<string, object>[] responseParameters)
+        public static async Task<DomainEventResult> CreateDomainResponse(Guid aggregateId, object @event, params KeyValuePair<string, object>[] responseParameters)
         {
+            ESMetadata metadata = new ESMetadata(aggregateId, DateTime.UtcNow, "DummyUser");
+
             //TODO: need Metadata for later correlations or causations
             return new DomainEventResult()
             {
@@ -20,7 +22,8 @@ namespace CoinBazaar.Infrastructure.Helpers
                 EventData = new EventData(
                     Uuid.NewUuid(),
                     @event.GetType().Name,
-                    JsonSerializer.SerializeToUtf8Bytes(@event)
+                    Encoding.UTF8.GetBytes(JsonSerializer.Serialize(@event)),
+                    Encoding.UTF8.GetBytes(JsonSerializer.Serialize(metadata))
                     ),
                 ResponseParameters = responseParameters
             };

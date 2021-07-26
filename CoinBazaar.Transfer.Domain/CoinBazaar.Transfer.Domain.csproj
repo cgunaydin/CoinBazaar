@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="EventStore.Client.Grpc.Streams" Version="21.2.0" />
+    <ProjectReference Include="..\CoinBazaar.Infrastructure\CoinBazaar.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
