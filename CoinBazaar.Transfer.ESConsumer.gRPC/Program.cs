@@ -1,3 +1,5 @@
+using CoinBazaar.Infrastructure.Mongo;
+using CoinBazaar.Infrastructure.Mongo.Data;
 using EventStore.Client;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,6 +27,13 @@ namespace CoinBazaar.Transfer.ESConsumer.gRPC
                     EventStoreOptions options = configuration.GetSection("EventStore").Get<EventStoreOptions>();
                     services.AddSingleton(options);
 
+                    var mongoConfig = new MongoServerConfig();
+                    configuration.Bind(mongoConfig);
+
+                    var bpmContext = new BPMContext(mongoConfig.MongoDB);
+
+                    services.AddSingleton(bpmContext);
+
                     var eventStoreClient = new EventStorePersistentSubscriptionsClient(new EventStoreClientSettings
                     {
 
@@ -33,7 +42,7 @@ namespace CoinBazaar.Transfer.ESConsumer.gRPC
                             {
                                 ServerCertificateCustomValidationCallback =
                                     (message, certificate2, x509Chain, sslPolicyErrors) => true // ignore https
-                    },
+                            },
                         ConnectivitySettings = new EventStoreClientConnectivitySettings
                         {
                             Address = new Uri(configuration.GetValue<string>("EventStore:ConnectionString"))

@@ -30,6 +30,11 @@ services:
       ME_CONFIG_MONGODB_ADMINPASSWORD: example
     depends_on:
       - mongo
+  coinbazaar.transfer.esconsumer.grpc:
+    image: ${DOCKER_REGISTRY-}coinbazaartransferesconsumergrpc
+    build:
+      context: .
+      dockerfile: CoinBazaar.Transfer.ESConsumer.gRPC/Dockerfile
 #  eventstore.db:
 #    image: eventstore/eventstore:latest
 #    environment:
@@ -55,3 +60,4 @@ services:
 #volumes:
 #  eventstore-volume-data:
 #  eventstore-volume-logs:
+

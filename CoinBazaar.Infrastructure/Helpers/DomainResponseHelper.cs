@@ -11,9 +11,9 @@ namespace CoinBazaar.Infrastructure.Helpers
 {
     public static class DomainResponseHelper
     {
-        public static async Task<DomainEventResult> CreateDomainResponse(Guid aggregateId, object @event, params KeyValuePair<string, object>[] responseParameters)
+        public static async Task<DomainEventResult> CreateDomainResponse(Guid aggregateId, bool processStarter, object @event, params KeyValuePair<string, object>[] responseParameters)
         {
-            ESMetadata metadata = new ESMetadata(aggregateId, DateTime.UtcNow, "DummyUser");
+            ESMetadata metadata = new ESMetadata(aggregateId, processStarter, DateTime.UtcNow, "DummyUser");
 
             //TODO: need Metadata for later correlations or causations
             return new DomainEventResult()
