@@ -1,9 +1,7 @@
-﻿using EventStore.Client;
+﻿using CoinBazaar.Infrastructure.Models;
+using EventStore.Client;
 using System;
-using CoinBazaar.Infrastructure.Extensions;
 using System.Threading.Tasks;
-using CoinBazaar.Infrastructure.Annotations;
-using CoinBazaar.Infrastructure.Models;
 
 namespace CoinBazaar.Infrastructure.EventBus
 {

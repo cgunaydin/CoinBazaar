@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace CoinBazaar.Infrastructure.EventBus
 {
-    public interface IProcessStarter
+    public class ProcessStarterEvent : IProcessStarterEvent
     {
         public Guid ProcessId { get; set; }
-        public string ProcessName { get; init; }
-        public IList<KeyValuePair<string, object>> ProcessParameters { get; init; }
+        public string ProcessName { get; set; }
+        public IList<KeyValuePair<string, object>> ProcessParameters { get; set; }
     }
 }

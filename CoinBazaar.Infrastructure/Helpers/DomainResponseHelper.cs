@@ -2,7 +2,6 @@
 using EventStore.Client;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -15,7 +14,7 @@ namespace CoinBazaar.Infrastructure.Helpers
         {
             ESMetadata metadata = new ESMetadata(aggregateId, processStarter, DateTime.UtcNow, "DummyUser");
 
-            //TODO: need Metadata for later correlations or causations
+            //Metadata needed for correlations or causations
             return new DomainEventResult()
             {
                 AggregateId = aggregateId,
